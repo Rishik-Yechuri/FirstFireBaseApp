@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         statusText = findViewById(R.id.statusText);
         FirebaseFunctions.getInstance() // Optional region: .getInstance("europe-west1")
-                .getHttpsCallable("createGame")
+                .getHttpsCallable("createUser")
                 .call();
     }
 }
