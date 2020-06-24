@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         Map<String, Object> data = new HashMap<>();
         data.put("userId", userId);
         FirebaseFunctions.getInstance()
-                .getHttpsCallable("getTheLastNamePlease")
+                .getHttpsCallable("deleteUser")
                 .call(data)
                 .continueWith(new Continuation<HttpsCallableResult, String>() {
                     @Override
