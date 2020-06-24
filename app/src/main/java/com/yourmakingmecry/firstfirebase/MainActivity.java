@@ -27,20 +27,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         statusText = findViewById(R.id.statusText);
-        addMessage("dieselguy");
-        String filtered = String.valueOf(dataReturned);
-        Log.d("horses","Value of returned data:" + filtered);
+        addMessage("petrolguy");
+        //String filtered = String.valueOf(dataReturned);
+        //Log.d("horses","Value of returned data:" + filtered);
         /*FirebaseFunctions.getInstance() // Optional region: .getInstance("europe-west1")
                 .getHttpsCallable("createUser")
                 .call("hi");*/
 
     }
-    private void addMessage(String text) {
+    private void addMessage(String userId) {
         // Create the arguments to the callable function.
         Map<String, Object> data = new HashMap<>();
-        data.put("text", text);
+        data.put("userId", userId);
         FirebaseFunctions.getInstance()
-                .getHttpsCallable("createUser")
+                .getHttpsCallable("getTheLastNamePlease")
                 .call(data)
                 .continueWith(new Continuation<HttpsCallableResult, String>() {
                     @Override
@@ -48,9 +48,17 @@ public class MainActivity extends AppCompatActivity {
                         // This continuation runs on either success or failure, but if the task
                         // has failed then getResult() will throw an Exception which will be
                         // propagated down.
+                        /*String result = (String) task.getResult().getData();
+                        Log.d("dude","result:" + result);
+                        return result;*/
+                        Log.d("dude","Here -2");
                         HashMap result = (HashMap) task.getResult().getData();
+                        Log.d("dude","Here -1");
+                        Log.d("dude","result value:" + result);
                         JSONObject res = new JSONObject(result);
-                        //String message = res.getString("message");
+                        Log.d("dude","Here");
+                        String message = res.getString("lastName");
+                        Log.d("dude","message:"+message);
                         return null;
                     }
                 });
